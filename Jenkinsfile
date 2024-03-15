@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                kubectl -n default rollout restart deployment/section6-nodejs
+                sh "kubectl -n default rollout restart deployment/section6-nodejs"
             }
         }
 
