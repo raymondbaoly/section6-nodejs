@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY_IMAGE = 'raymondbaoly/nodejs'
+        REGISTRY_IMAGE = 'raymondbaoly/section6-nodejs'
         DOCKERFILE_PATH = 'Dockerfile'
 
     }
@@ -12,6 +12,13 @@ pipeline {
             steps {
                 script {
                     sh 'docker build -t ${REGISTRY_IMAGE}:prod -f ${DOCKERFILE_PATH} .'
+                }
+            }
+        }
+        stage('SonarQube - SAST') {
+            steps {
+                withSonarQubeEnv('section6') {
+                    sh 'sonar-scanner -Dsonar.projectKey=section6-nodejs -Dsonar.sources=. -Dsonar.language=ts'
                 }
             }
         }
