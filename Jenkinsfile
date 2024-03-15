@@ -25,24 +25,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                sh "kubectl -n default rollout restart deployment/section6-nodejs"
+                    sh "kubectl -n default rollout restart deployment/section6-nodejs"
                 }
             }
         }
 
-    }
-
-    post {
-        success {
-            script{
-                // Send success notification, for example: Telegram
-            }
-        }
-        failure {
-            script{
-                // Send success notification, for example: Telegram
-            }
-        }
     }
 
 }
